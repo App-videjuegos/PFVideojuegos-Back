@@ -138,7 +138,7 @@ GET -->  https://pfvideojuegos-back-production.up.railway.app/user
 Extrae el usuario por ID de la BD postgres
 GET --> https://pfvideojuegos-back-production.up.railway.app/user/198
 
-Extrae el video juego por nombre de la BD postgres
+Extrae el usuario por nombre de la BD postgres
 GET --> https://pfvideojuegos-back-production.up.railway.app/user?name=Jonhy Deep
 
 Actualiza los datos de un usuario
