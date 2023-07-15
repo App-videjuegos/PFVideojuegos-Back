@@ -45,7 +45,7 @@ router.post("/createBulkDB", async (req, res) => {
         requeriments_ru: game.platforms
         .filter((requeriment) => requeriment.requirements_en !== null)
         .map((requeriment) => requeriment.requirements_ru),
-        price: (Math.random() * (100 - 45 )).toFixed(2),
+        price: (Math.random() * (100 - 45 )).toFixed(0),  // se modificó para que no muestre decimales
       }));
   
       const savedGames = await Videogame.bulkCreate(allGames);

@@ -171,17 +171,26 @@ if (!Array.isArray(gamesData)) {
   gamesData = [gamesData]
 }
 
-// Recorrer los datos de los juegos y actualizar la descripción por ID
+// Recorrer los datos de los juegos y actualizar la descripción por ID y si el no tiene requirimientos llena por default para no dejarlos vacios []
 let resultados = [];
 
   for (const game of gamesData) {
     const { id, description } = game;
+    
     try {
-      const resultado = await Videogame.update(
-        { description },
-        { where: { id } }
-      );
-      resultados.push(resultado);
+      const videojuego = await Videogame.findByPk(id);
+      if (videojuego) {
+        const {requeriments_en } = videojuego;
+        const requerimentsActualizados = requeriments_en.length ? requeriments_en : [{"minimum": "Minimum:\r\n\r\nOS: macOS 10.9.1\r\n\r\nProcessor: 2.0GHz Intel or greater\r\n\r\nMemory: 4GB\r\n\r\nGraphics: 512Mb AMD 4850, 512Mb Nvidia 650M, Intel HD4000\r\n\r\nHard Drive: 14GB"}];
+        const resultado = await Videogame.update(
+          { description, requeriments_en: requerimentsActualizados },
+          { where: { id } }
+        );
+        resultados.push(resultado);
+      }else{
+        console.error(`Error no se encontró el juego con ID ${id}:`, error);
+      }
+      
     } catch (error) {
     // Manejar el error de actualización para cada juego individual si es necesario
       console.error(`Error al actualizar el juego con ID ${id}:`, error);
