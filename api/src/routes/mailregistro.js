@@ -21,11 +21,11 @@ const template = handlebars.compile(source);
 
 // Reemplazar las variables en la plantilla con los valores deseados
 router.post('/correo-registro', (req, res) => {
-    const { correo } = req.body;
-  
+    const { correo, user, fullname } = req.body;
+    fullname = "cristian";
     // Reemplazar las variables en la plantilla con los valores deseados
     const replacements = {
-      nombre: 'GameShop'
+      nombre: fullname
     };
 const html = template(replacements);
 
@@ -33,15 +33,15 @@ const html = template(replacements);
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: process.env.EMAIL || 'gameshophenry@gmail.com', // TODO: yrouter.use('/correo-registro', );our gmail account
-        pass: process.env.PASSWORD || 'abjawlnvqhpohaon' // TODO: your gmail password
+        user: process.env.EMAIL || 'backendpf@gmail.com', // TODO: yrouter.use('/correo-registro', );our gmail account
+        pass: process.env.PASSWORD || 'xbwlxczwffqyefsp' // TODO: your gmail password
     }
 });
 // Definir el mensaje de correo electrónico
 const mailOptions = {
-    from: 'gameshophenry@gmail.com', // TODO: email sender
+    from: 'backendpf@gmail.com', // TODO: email sender
     to: correo, // Email del usuario registrado
-    subject: 'Bienvenido a GameShop',
+    subject: 'Bienvenido a GameStack',
     html: `<!DOCTYPE html>
       <html lang="en">
       <head>
