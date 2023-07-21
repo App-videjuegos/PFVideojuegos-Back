@@ -22,7 +22,6 @@ const template = handlebars.compile(source);
 // Reemplazar las variables en la plantilla con los valores deseados
 router.post('/correo-registro', (req, res) => {
     const { correo, user, fullname } = req.body;
-    fullname = "cristian";
     // Reemplazar las variables en la plantilla con los valores deseados
     const replacements = {
       nombre: fullname
