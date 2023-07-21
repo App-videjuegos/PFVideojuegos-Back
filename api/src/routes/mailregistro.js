@@ -21,11 +21,11 @@ const template = handlebars.compile(source);
 
 // Reemplazar las variables en la plantilla con los valores deseados
 router.post('/correo-registro', (req, res) => {
-    const { correo } = req.body;
-  
+    const { correo, user, fullname } = req.body;
+    fullname = "cristian";
     // Reemplazar las variables en la plantilla con los valores deseados
     const replacements = {
-      nombre: 'GameStack'
+      nombre: fullname
     };
 const html = template(replacements);
 
