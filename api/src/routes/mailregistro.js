@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const nodemailer = require("nodemailer");
-const fs = require("fs");
-const handlebars = require("handlebars");
-const dotenv = require("dotenv");
-const path = require("path");
+const nodemailer = require('nodemailer');
+const fs = require('fs');
+const handlebars = require('handlebars');
+const dotenv = require('dotenv');
+const path = require('path');
 
 // const html = require('../templatemails/registro.jsx');
 
@@ -15,11 +15,11 @@ dotenv.config();
 
 const source = fs.readFileSync(path.join(__dirname, "registro.html"), "utf-8");
 
+
 // Compilar la plantilla con Handlebars
 const template = handlebars.compile(source);
 
 // Reemplazar las variables en la plantilla con los valores deseados
-<<<<<<< Updated upstream
 router.post('/correo-registro', (req, res) => {
     const { correo } = req.body;
   
@@ -28,22 +28,11 @@ router.post('/correo-registro', (req, res) => {
       nombre: 'GameStack'
     };
 const html = template(replacements);
-=======
-router.post("/correo-registro", (req, res) => {
-  const { correo } = req.body;
->>>>>>> Stashed changes
 
-  // Reemplazar las variables en la plantilla con los valores deseados
-  const replacements = {
-    nombre: "GameShop",
-  };
-  const html = template(replacements);
-
-  // Configurar el transportador de correo electrónico
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
+// Configurar el transportador de correo electrónico
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
     auth: {
-<<<<<<< Updated upstream
         user: process.env.EMAIL || 'backendpf@gmail.com', // TODO: yrouter.use('/correo-registro', );our gmail account
         pass: process.env.PASSWORD || 'xbwlxczwffqyefsp' // TODO: your gmail password
     }
@@ -53,17 +42,6 @@ const mailOptions = {
     from: 'backendpf@gmail.com', // TODO: email sender
     to: correo, // Email del usuario registrado
     subject: 'Bienvenido a GameStack',
-=======
-      user: process.env.EMAIL || "gameshophenry@gmail.com", // TODO: yrouter.use('/correo-registro', );our gmail account
-      pass: process.env.PASSWORD || "abjawlnvqhpohaon", // TODO: your gmail password
-    },
-  });
-  // Definir el mensaje de correo electrónico
-  const mailOptions = {
-    from: "gameshophenry@gmail.com", // TODO: email sender
-    to: correo, // Email del usuario registrado
-    subject: "Bienvenido a GameShop",
->>>>>>> Stashed changes
     html: `<!DOCTYPE html>
       <html lang="en">
       <head>
@@ -73,19 +51,17 @@ const mailOptions = {
       <body>
       ${html}
       </body>
-      </html>`,
+      </html>`
   };
 
   // Enviar el correo electrónico
-  transporter.sendMail(mailOptions, function (error, info) {
+  transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
       console.log(error);
-      res.status(500).json({ error: "Error al enviar el correo electrónico" });
+      res.status(500).json({ error: 'Error al enviar el correo electrónico' });
     } else {
-      console.log("Correo electrónico enviado: " + info.response);
-      res
-        .status(200)
-        .json({ message: "Correo electrónico enviado exitosamente" });
+      console.log('Correo electrónico enviado: ' + info.response);
+      res.status(200).json({ message: 'Correo electrónico enviado exitosamente' });
     }
   });
 });

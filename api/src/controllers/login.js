@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const { Users } = require('../db'); // Importa el modelo de usuario
+const generateToken = require('./generatorJwt.js')
 
 
 
@@ -26,7 +27,11 @@ async function login (user, password) {
       }   
 
       // Devuelve el token al frontend
+      const token = generateToken(user,password)
+      
+  
       return {
+        token:token,
         id: userDb.id,
         user: userDb.user,
         fullname: userDb.fullname,
@@ -34,13 +39,11 @@ async function login (user, password) {
         email: userDb.email,
         date: userDb.date,
         image: userDb.image,
-        phone: userDb.phone,
       };
     } catch (error) {
       console.error('Error de autenticación:', error);
-      return ({ message: 'Error de autenticación' });
+      return { message: 'Error de autenticación' };
     }
-
-}
+  }
 
 module.exports = { login };
