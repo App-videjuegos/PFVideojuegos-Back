@@ -1,18 +1,18 @@
 const bcrypt = require('bcrypt');
 const { Users } = require('../db'); // Importa el modelo de usuario
-const generateToken = require('./generatorJwt.js')
+const generateToken = require('./generatorJwt')
 
 
 
 async function login (user, password) {
 
-    try {
+    
       // Busca al usuario en la base de datos por su nombre de usuario
       let userDb = await Users.findOne({ where: { user: user } });
     
       // Si no se encuentra al usuario, devuelve un error de autenticación
       if (!userDb) {
-        return res.status(401).json({ message: 'Credenciales inválidas' });
+        throw new Error("Credenciales inválidas");
       }
 
         // Obtener la contraseña almacenada en la base de datos
@@ -23,7 +23,7 @@ async function login (user, password) {
     
       // Si la contraseña no coincide, devuelve un error de autenticación
       if (!isPasswordValid) {
-        return res.status(401).json({ message: 'Credenciales inválidas' });
+        throw new Error ("Credenciales inválidas");
       }   
 
       // Devuelve el token al frontend
@@ -40,10 +40,8 @@ async function login (user, password) {
         date: userDb.date,
         image: userDb.image,
       };
-    } catch (error) {
-      console.error('Error de autenticación:', error);
-      return { message: 'Error de autenticación' };
-    }
-  }
+}
+    
+  
 
 module.exports = { login };

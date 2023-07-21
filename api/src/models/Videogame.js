@@ -19,20 +19,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     releaseDate: {
-      type: DataTypes.DATEONLY,
-      get() {
-        // Obtener la fecha en formato 'dd/mm/aaaa'
-        const date = this.getDataValue('releaseDate');
-        if (date) {
-          const formattedDate = new Date(date).toLocaleDateString('es-ES', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-          });
-          return formattedDate;
-        }
-        return null;
-      },
+      type: DataTypes.DATE, 
     },
     description: {
       type: DataTypes.TEXT,
