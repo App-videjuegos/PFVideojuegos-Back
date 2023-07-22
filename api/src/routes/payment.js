@@ -5,7 +5,7 @@ const { Router } = require("express");
 const express = require("express");
 const Stripe = require("stripe");
 const stripe = new Stripe("sk_test_51N7eXtIEe9GBUqtLmhCnbI8paifQ5nogExU3BkuN5AyMzAoGgDHqKcdAHkxPuVQHi6koSWM6stHCWpnmLPh8Wqhe00vEADGmgi");
-
+const correoCarrito =require("../routes/mailcarrito")
 const router = Router();
 router.use(express.json());
 
@@ -62,7 +62,9 @@ router.post("/pay", async (req, res) => {
 router.post("/createSale", async (req, res) => {
     const { paymentId, amount, items, userId } = req.body;
     const newItems = JSON.parse(items);
+    const correo = "piny274@msn.com"
     try {
+        correoCarrito(paymentId, amount, newItems, userId, correo)
         const response = await addToSales(paymentId, amount, newItems, userId);
         console.log("Venta almacenada")
         res.json({ message: "ok", })
