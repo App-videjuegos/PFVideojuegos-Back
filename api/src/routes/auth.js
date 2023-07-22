@@ -14,10 +14,10 @@ router.post('/', async (req, res) => {
   let { user, password } = req.body;
     try {
 
-      let tokenLogin = await login( {user, password })
+      let dataUser = await login(user, password)
 
     // Enviar el token al frontend
-    res.status(200).json({ tokenLogin });
+    res.status(200).json( dataUser);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error interno del servidor' });
