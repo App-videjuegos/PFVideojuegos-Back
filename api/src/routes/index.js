@@ -26,6 +26,7 @@ const registroRouter = require('./mailregistro');
 const carritoRouter = require('./mailcarrito');
 const bulkCreateDescriptionsGames = require('./updateGamesDescription')
 const createBulkDB = require("./createBulkDB")
+const updateGameRating = require("./updateGameRating")
 
 
 
@@ -55,6 +56,7 @@ router.use("/cart", createCart);
 router.use(registroRouter);
 router.use(carritoRouter);
 router.use("/games", bulkCreateDescriptionsGames);
+router.use("/games", updateGameRating);
 
 
 
