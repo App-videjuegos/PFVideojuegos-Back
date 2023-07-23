@@ -28,6 +28,7 @@ const bulkCreateDescriptionsGames = require('./updateGamesDescription')
 const createBulkDB = require("./createBulkDB")
 const updateGameRating = require("./updateGameRating")
 const reviews = require("./reviews")
+const getReviews = require("./getReviews")
 
 
 
@@ -56,6 +57,7 @@ router.use("/sales", getSales);
 router.use("/sales", getSalesId);
 router.use("/cart", createCart);
 router.use("/reviews", reviews);
+router.use("/reviews", getReviews);
 router.use(registroRouter);
 router.use(carritoRouter);
 router.use("/games", bulkCreateDescriptionsGames);
