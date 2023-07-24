@@ -1,12 +1,12 @@
 const { Router } = require("express");
 const express = require("express");
 const {createGame} = require("../controllers/createGame");
-const verifyToken = require("../controllers/verifyToken")
+// const verifyToken = require("../controllers/verifyToken")
 
 const router = Router();
 router.use(express.json());
 
-router.post("/", verifyToken, async (req, res) => {
+router.post("/", async (req, res) => {
  
   let { id, name, releaseDate, platforms, description, image, price, genre, screenShots, requeriments_en } = req.body;
   try {

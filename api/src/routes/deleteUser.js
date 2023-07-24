@@ -1,12 +1,12 @@
 const { Router } = require('express');
 const express = require('express');
 const { deleteUser } = require('../controllers/deleteUser');
-const verifyToken = require("../controllers/verifyToken")
+// const verifyToken = require("../controllers/verifyToken")
 
 const router = Router();
 router.use(express.json());
 
-router.delete("/:id",verifyToken, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   let { id } = req.params;
   try {
     let user = await deleteUser(id);
