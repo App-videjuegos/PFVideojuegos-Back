@@ -8,7 +8,7 @@
   <meta name="x-apple-disable-message-reformatting">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="telephone=no" name="format-detection">
-  <title>New message</title><!--[if (mso 16)]>
+  <title>Empty template</title><!--[if (mso 16)]>
 <style type="text/css">
 a {text-decoration: none;}
 </style>
@@ -487,22 +487,28 @@ a {text-decoration: none;}
                                 </td>
                               </tr>
                               <tr>
-                                <td align="left" style="padding:0;Margin:0;padding-top:5px;padding-bottom:40px">
+                                <td align="left" style="padding:0;Margin:0;padding-top:5px">
                                   <p
                                     style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;letter-spacing:0;color:#333333;font-size:18px">
-                                    <u><strong></strong></u><br></p>
+                                    <br></p>
                                   <p
                                     style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;letter-spacing:0;color:#333333;font-size:18px">
-                                    <u><strong>Número de orden:</strong></u><strong> #Id_Venta&nbsp;</strong></p><br>
+                                    <u><strong>Número de orden:</strong></u><strong> {{paymentId}}&nbsp;</strong></p><br>
                                   <p
                                     style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;letter-spacing:0;color:#333333;font-size:18px">
                                     Buenas noticias {{nombre}},</p>
                                   <p
                                     style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;letter-spacing:0;color:#333333;font-size:18px">
+                                    &nbsp;</p>
+                                  <p
+                                    style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;letter-spacing:0;color:#333333;font-size:18px">
+                                  </p>
+                                  <p
+                                    style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;letter-spacing:0;color:#333333;font-size:18px">
                                     Hemos recibido tu pedido, ahora nos encargaremos de trabajar en él.<br><br>Pronto te
-                                    enviaremos toda la información para que puedas disfrutar de
-                                    tu(s)&nbsp;videojuego(s).<br><br>Gracias por comprar con nosotros,<br><br>El equipo
-                                    GameStack</p>
+                                    enviaremos toda la información para que puedas disfrutar de tu(s)
+                                    videojuego(s).<br><br>Gracias por comprar con nosotros,<br><br>El equipo GameStack
+                                  </p>
                                   <p
                                     style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;letter-spacing:0;color:#333333;font-size:18px">
                                     <br></p>
@@ -511,15 +517,47 @@ a {text-decoration: none;}
                                     <br><b>RESUMEN DEL PEDIDO</b></p>
                                 </td>
                               </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left" style="padding:0;Margin:0;padding-right:20px;padding-left:20px">
+                      <table cellpadding="0" cellspacing="0"
+                        style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                        <tr>
+                          <td align="left" style="padding:0;Margin:0;width:660px">
+                            <table cellpadding="0" cellspacing="0" width="100%" role="presentation"
+                              style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;border-style:solid;border-width:2px">
                               <tr>
-                                <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank"
-                                    href="https://viewstripo.email"
-                                    style="mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:14px"><img
-                                      class="adapt-img"
-                                      src="https://xpnery.stripocdn.email/content/guids/CABINET_6b5a391d423510a80fa2ff355ba5439fe8f839b724946c9ecefae32bd3bff87b/images/image_centro.jpg"
-                                      alt=""
-                                      style="display:block;font-size:14px;border:0;outline:none;text-decoration:none"
-                                      width="660"></a></td>
+                                <td align="left" style="padding:0;Margin:0">
+                                  <p
+                                    style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
+                                    Pago Total: ${{{payTotal}}}</p>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left" style="padding:0;Margin:0;padding-top:20px;padding-right:20px;padding-left:20px">
+                      <table cellpadding="0" cellspacing="0"
+                        style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                        <tr>
+                          <td align="left" style="padding:0;Margin:0;width:660px">
+                            <table cellpadding="0" cellspacing="0" width="100%" role="presentation"
+                              style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                              <tr>
+                                <td align="center" style="padding:0;Margin:0;font-size:0"><img class="adapt-img"
+                                    src="https://xpnery.stripocdn.email/content/guids/CABINET_fe802308302762674d4ba647cd7575c3dc96dfc3052234a2a5f8a7b12a523ad6/images/image_centro.jpg"
+                                    alt="" width="660"
+                                    style="display:block;font-size:14px;border:0;outline:none;text-decoration:none">
+                                </td>
                               </tr>
                             </table>
                           </td>
@@ -542,7 +580,7 @@ style="height:51px; v-text-anchor:middle; width:237px" arcsize="50%" stroke="f" 
 <w:anchorlock></w:anchorlock>
 <center style='color:#ffffff; font-family:arial, "helvetica neue", helvetica, sans-serif; font-size:18px; font-weight:400; line-height:18px; mso-text-raise:1px'>Vamos de compras!</center>
 </v:roundrect></a>
-<![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border"
+<![endif]--><!--[if !mso]><!-- --><span class="es-button-border msohide"
                                     style="border-style:solid;border-color:#2CB543;background:#31CB4B;border-width:0px 0px 2px 0px;display:inline-block;border-radius:30px;width:auto;mso-hide:all"><a
                                       href="https://viewstripo.email" class="es-button" target="_blank"
                                       style="mso-style-priority:100 !important;text-decoration:none !important;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;padding:10px 20px 10px 20px;display:inline-block;background:#31CB4B;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;letter-spacing:0;mso-padding-alt:0;mso-border-alt:10px solid #31CB4B">Vamos

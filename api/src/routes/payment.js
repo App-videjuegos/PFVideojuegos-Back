@@ -62,9 +62,8 @@ router.post("/pay", async (req, res) => {
 router.post("/createSale", async (req, res) => {
     const { paymentId, amount, items, userId } = req.body;
     const newItems = JSON.parse(items);
-    const correo = "piny274@msn.com"
     try {
-        correoCarrito(paymentId, amount, newItems, userId, correo)
+        correoCarrito(paymentId, amount, newItems, userId)
         const response = await addToSales(paymentId, amount, newItems, userId);
         console.log("Venta almacenada")
         res.json({ message: "ok", })
