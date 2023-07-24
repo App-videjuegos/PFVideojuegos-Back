@@ -5,7 +5,7 @@ require("dotenv").config();
 
 
 const sequelize = new Sequelize(
-
+  
   "postgresql://postgres:dxGgzA4NLgpvu8C53wJm@containers-us-west-88.railway.app:7549/railway",
   
   {

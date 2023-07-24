@@ -29,6 +29,7 @@ const createBulkDB = require("./createBulkDB")
 const updateGameRating = require("./updateGameRating")
 const reviews = require("./reviews")
 const getReviews = require("./getReviews")
+const forgotPassword = require("./forgotPassword")
 
 
 
@@ -62,6 +63,7 @@ router.use(registroRouter);
 router.use(carritoRouter);
 router.use("/games", bulkCreateDescriptionsGames);
 router.use("/games", updateGameRating);
+router.use("/forgotPassword", forgotPassword)
 
 
 
