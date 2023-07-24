@@ -40,5 +40,8 @@ module.exports = (sequelize) => {
       token: {
         type: DataTypes.STRING,
       },
+      user: {
+        type: DataTypes.STRING,
+      },
   });
 };
