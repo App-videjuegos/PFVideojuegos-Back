@@ -1,15 +1,16 @@
 const { Users } = require("../db");
+const bcrypt = require('bcrypt');
 
 const updateUser = async (req, res) => {
 
-  const { id, user, fullname, password, userAdmin, email, date, image, phone, tac, newsLetter } = req.body;
+  const { id, user, fullname, pass, userAdmin, email, date, image, phone, tac, newsLetter } = req.body;
 
   try {
     const usuario = await Users.findByPk(id);
     if (!usuario) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
-
+    const password = await bcrypt.hash(pass, 10);
     await usuario.update({ id, user, fullname, password, userAdmin, email, date, image, phone, tac, newsLetter });
 
     return res.json({ message: "Usuario actualizado correctamente" });

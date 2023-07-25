@@ -4,6 +4,7 @@ const emailForgotPassword = require("./mailForgotPassword")
 const forgotPassword = async (req, res) => {
 
   const { email } = req.params;
+  const bcrypt = require('bcrypt');
 
   try {
     const user = await Users.findOne({
@@ -21,8 +22,8 @@ const forgotPassword = async (req, res) => {
         cadenaAleatoria += caracteres.charAt(indiceAleatorio);
       }
 
-
-      user.password = cadenaAleatoria;
+      const hashedPassword = await bcrypt.hash(cadenaAleatoria, 10);
+      user.password = hashedPassword;
       await user.save();
       emailForgotPassword(user.user, cadenaAleatoria, email)
       res.json({ message: 'Contraseña actualizada exitosamente.' });
