@@ -12,6 +12,7 @@ async function createReview({
   reviewDate,
   recommendation,
   hashtags,
+  user,
 }) {
   try {
     let resultado = await Reviews.create({
@@ -26,6 +27,7 @@ async function createReview({
       reviewDate,
       recommendation,
       hashtags,
+      user,
     });
     console.log(resultado);
   } catch (error) {

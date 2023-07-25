@@ -18,6 +18,7 @@ router.post("/", async (req, res) => {
     reviewDate,
     recommendation,
     hashtags,
+    user,
   } = req.body;
 
   try {
@@ -33,6 +34,7 @@ router.post("/", async (req, res) => {
       reviewDate,
       recommendation,
       hashtags,
+      user,
     });
 
     res
