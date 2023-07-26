@@ -4,119 +4,92 @@ const handlebars = require('handlebars');
 const dotenv = require('dotenv');
 const path = require('path');
 const { Users } = require("../db");
+const { Videogame } = require("../db");
 
 dotenv.config();
 
 async function correoCarrito(paymentId, amount, newItems, userId) {
 
-    const user = await Users.findByPk(userId); // Buscar el usuario por su ID
-    if (!user) { // Verificar si el usuario no existe
-      throw new Error('Usuario no encontrado');
-    }
+  console.log(newItems);
+  const user = await Users.findByPk(userId); // Buscar el usuario por su ID
+  if (!user) { // Verificar si el usuario no existe
+    throw new Error('Usuario no encontrado');
+  }
 
 
   // Leer el archivo HTML de la plantilla
   const source = fs.readFileSync(path.join(__dirname, "carrito.html"), "utf-8");
-  // const itemsTemplate = ` <tr>
-  // <td style="padding-right: 20px; padding-left: 20px; font-family: Arial; font-size: 16px; font-weight: bold;" align="left">
-  //   <table style="color: #5c5c5c; font-family: Arial; font-size: 16px; margin-top: 26px; table-layout: fixed;" border="0" width="100%" cellspacing="0" cellpadding="0" align="left">
-  //     <tbody>
-  //       <tr>
-  //         <td align="left" valign="top" width="150">
-  //           <img id="x_product-item-image" style="width: 150px; display: block;" src="https://ci4.googleusercontent.com/proxy/byuWbgrrcMPyN97dDnIENFeumPklJ36Ka9CZgWwSsTW3_uawZZoDWD7KwxiBJzh6JxJoEnT4wzJwrc0SzAHAmqwUklZHlI_DVQ9c7G790NR5LO30XWVfmzqVQBCBPVhoLfTRiOU3K6BnmWv2zYEdBzapbH4sI0USd2KEAUhQUz0weBwcr0DGI4moRggyHYJykEsAba-iWGMrlUZY-lxl0NxQelc=s0-d-e1-ft#https://assets.adidas.com/images/w_142,h_142,f_auto,q_auto:sensitive/eed497208ed64dc18a9baf540092a101_9366/HP7558_590_HP7558_01_standard.jpg.jpg" alt="Cart Image" width="150" name="m_8732847656769436582_x_product-item-image" border="0">
-  //         </td>
-  //         <td style="text-align: left; color: #5c5c5c; padding-right: 20px; padding-left: 20px; font-family: Arial; font-size: 16px; font-weight: lighter;" align="left" valign="top">
-  //           <span id="x_product-name-text" style="text-transform: uppercase;">Tenis 
-  //             <span class="LI ng" data-ddnwab="PR_16_0" aria-invalid="spelling">Runfalcon</span> 2.0
-  //           </span> 
-  //           <br>
-  //           <span id="x_product-totalprice-text">$280.458</span> 
-  //           <span id="x_product-grossprice-text" style="text-decoration: line-through; color: #ff0000;">$329.950</span> 
-  //           <br>
-  //           <br>
-  //           <span id="x_product-color-text">Color: Core Black / Core Black / Carbon</span> 
-  //           <br>
-  //           <span id="x_product-size-text">Talla: US H 7 / M 8</span> 
-  //           <br>
-  //           <span id="x_product-quantity-text">Cantidad: 1</span> 
-  //           <br>
-  //           <span id="x_product-articleno-text">Artículo N°: 
-  //             <span class="LI ng" data-ddnwab="PR_17_0" aria-invalid="spelling">HP7558</span>
-  //           </span>
-  //         </td>
-  //       </tr>
-  //       <br>
-  //     </tbody>
-  //     <br>
-  //     <br>
-  //     <br>
-  //     <tr>
-  // <td style="padding-right: 20px; padding-left: 20px; font-family: Arial; font-size: 16px; font-weight: bold;" align="left">
-  //   <table style="color: #5c5c5c; font-family: Arial; font-size: 16px; margin-top: 26px; table-layout: fixed;" border="0" width="100%" cellspacing="0" cellpadding="0" align="left">
-  //     <tbody>
-  //       <tr>
-  //         <td align="left" valign="top" width="150">
-  //           <img id="x_product-item-image" style="width: 150px; display: block;" src="https://ci4.googleusercontent.com/proxy/byuWbgrrcMPyN97dDnIENFeumPklJ36Ka9CZgWwSsTW3_uawZZoDWD7KwxiBJzh6JxJoEnT4wzJwrc0SzAHAmqwUklZHlI_DVQ9c7G790NR5LO30XWVfmzqVQBCBPVhoLfTRiOU3K6BnmWv2zYEdBzapbH4sI0USd2KEAUhQUz0weBwcr0DGI4moRggyHYJykEsAba-iWGMrlUZY-lxl0NxQelc=s0-d-e1-ft#https://assets.adidas.com/images/w_142,h_142,f_auto,q_auto:sensitive/eed497208ed64dc18a9baf540092a101_9366/HP7558_590_HP7558_01_standard.jpg.jpg" alt="Cart Image" width="150" name="m_8732847656769436582_x_product-item-image" border="0">
-  //         </td>
-  //         <td style="text-align: left; color: #5c5c5c; padding-right: 20px; padding-left: 20px; font-family: Arial; font-size: 16px; font-weight: lighter;" align="left" valign="top">
-  //           <span id="x_product-name-text" style="text-transform: uppercase;">Tenis 
-  //             <span class="LI ng" data-ddnwab="PR_16_0" aria-invalid="spelling">Runfalcon</span> 2.0
-  //           </span> 
-  //           <br>
-  //           <span id="x_product-totalprice-text">$280.458</span> 
-  //           <span id="x_product-grossprice-text" style="text-decoration: line-through; color: #ff0000;">$329.950</span> 
-  //           <br>
-  //           <br>
-  //           <span id="x_product-color-text">Color: Core Black / Core Black / Carbon</span> 
-  //           <br>
-  //           <span id="x_product-size-text">Talla: US H 7 / M 8</span> 
-  //           <br>
-  //           <span id="x_product-quantity-text">Cantidad: 1</span> 
-  //           <br>
-  //           <span id="x_product-articleno-text">Artículo N°: 
-  //             <span class="LI ng" data-ddnwab="PR_17_0" aria-invalid="spelling">HP7558</span>
-  //           </span>
-  //         </td>
-  //       </tr>
-  //       <br>
-  //     </tbody>
-  //     <br>
-  //     <br>
-  //     <br>
-  //     <tr>
-  //     <td style="padding-right: 20px; padding-left: 20px; font-family: Arial; font-size: 16px; font-weight: bold;" align="left">
-  //       <table style="color: #5c5c5c; font-family: Arial; font-size: 16px; margin-top: 26px; table-layout: fixed;" border="0" width="100%" cellspacing="0" cellpadding="0" align="left">
-  //         <tbody>
-  //           <tr>
-  //             <td align="left" valign="top" width="150">
-  //               <img id="x_product-item-image" style="width: 150px; display: block;" src="https://ci4.googleusercontent.com/proxy/byuWbgrrcMPyN97dDnIENFeumPklJ36Ka9CZgWwSsTW3_uawZZoDWD7KwxiBJzh6JxJoEnT4wzJwrc0SzAHAmqwUklZHlI_DVQ9c7G790NR5LO30XWVfmzqVQBCBPVhoLfTRiOU3K6BnmWv2zYEdBzapbH4sI0USd2KEAUhQUz0weBwcr0DGI4moRggyHYJykEsAba-iWGMrlUZY-lxl0NxQelc=s0-d-e1-ft#https://assets.adidas.com/images/w_142,h_142,f_auto,q_auto:sensitive/eed497208ed64dc18a9baf540092a101_9366/HP7558_590_HP7558_01_standard.jpg.jpg" alt="Cart Image" width="150" name="m_8732847656769436582_x_product-item-image" border="0">
-  //             </td>
-  //             <td style="text-align: left; color: #5c5c5c; padding-right: 20px; padding-left: 20px; font-family: Arial; font-size: 16px; font-weight: lighter;" align="left" valign="top">
-  //               <span id="x_product-name-text" style="text-transform: uppercase;">Tenis 
-  //                 <span class="LI ng" data-ddnwab="PR_16_0" aria-invalid="spelling">Runfalcon</span> 2.0
-  //               </span> 
-  //               <br>
-  //               <span id="x_product-totalprice-text">$280.458</span> 
-  //               <span id="x_product-grossprice-text" style="text-decoration: line-through; color: #ff0000;">$329.950</span> 
-  //               <br>
-  //               <br>
-  //               <span id="x_product-color-text">Color: Core Black / Core Black / Carbon</span> 
-  //               <br>
-  //               <span id="x_product-size-text">Talla: US H 7 / M 8</span> 
-  //               <br>
-  //               <span id="x_product-quantity-text">Cantidad: 1</span> 
-  //               <br>
-  //               <span id="x_product-articleno-text">Artículo N°: 
-  //                 <span class="LI ng" data-ddnwab="PR_17_0" aria-invalid="spelling">HP7558</span>
-  //               </span>
-  //             </td>
-  //           </tr>
-  //           <br>
-  //         </tbody>
-  //         <br>
-  //         <br>
-  //         <br>
-  //     `;
+  let itemsTemplate = '';
+
+  for (let i = 0; i < newItems.length; i++) {
+    const item = newItems[i];
+    const videogameId = item.videogameId;
+    const videogameName = item.videogameName;
+    const unitPrice = item.unitPrice;
+    const quantity = item.quantity;
+
+
+    const videogameFind = await Videogame.findByPk(videogameId);
+    const image = videogameFind.image;
+
+    console.log(videogameId, videogameName, unitPrice, quantity)
+    let itemTemplate = `
+      <tr>
+      <td align="left" valign="top" width="150">
+        <img id="x_product-item-image" style="width: 150px; display: block;" src=${image} alt="Cart Image" width="150" name="m_8732847656769436582_x_product-item-image" border="0">
+      </td>
+      <td style="text-align: left; color: #ffffff; padding-right: 20px; padding-left: 20px; font-family: Arial; font-size: 16px; font-weight: lighter;" align="left" valign="top">
+        <span id="x_product-name-text" style="text-transform: uppercase;">${videogameName}
+          <span class="LI ng" data-ddnwab="PR_16_0" aria-invalid="spelling"></span>
+        </span> 
+        <br>
+        <span id="x_product-articleno-text">Unit price:
+        <span id="x_product-totalprice-text"> $${unitPrice.toFixed(2)}</span> 
+        </span>
+        <br>
+        <span id="x_product-quantity-text">Quantity: ${quantity}</span> 
+        <br>
+        <span id="x_product-articleno-text">Reference N°: 
+          <span class="LI ng" data-ddnwab="PR_17_0" aria-invalid="spelling">${videogameId}</span>
+        </span>
+        <br>
+        <br>
+        <span id="x_product-name-text" style="text-transform: uppercase;">_________________________
+          <span class="LI ng" data-ddnwab="PR_16_0" aria-invalid="spelling"></span>
+        </span> 
+        <br>
+        <br>
+      </td>
+    </tr>
+          `;
+    itemsTemplate += itemTemplate;
+  }
+
+
+
+  itemsTemplate = `
+  <tr>
+  <td style="padding-right: 20px; padding-left: 20px; font-family: Arial; font-size: 16px; font-weight: bold;" align="left">
+    <table style="color: #5c5c5c; font-family: Arial; font-size: 16px; margin-top: 26px; table-layout: fixed;" border="0" width="100%" cellspacing="0" cellpadding="0" align="left">
+      <tbody>
+        ${itemsTemplate}
+        <br>
+         <td style="text-align: left; color: #ffffff; padding-right: 20px; padding-left: 20px; font-family: Arial; font-size: 20px; font-weight: lighter;" align="left" valign="top">
+        <span id="x_product-name-text" style="text-transform: uppercase;">Total paid:
+          <span class="LI ng" data-ddnwab="PR_16_0" aria-invalid="spelling"> $${(amount/100).toFixed(2)}</span>
+        </span> 
+        <br>
+        <br>
+        <br>
+      </td>
+      </td>
+        <br>
+        <br>
+        <br>
+      </tbody>
+      `;
+
+
 
 
   // Compilar la plantilla con Handlebars
@@ -127,7 +100,7 @@ async function correoCarrito(paymentId, amount, newItems, userId) {
     nombre: user.dataValues.fullname,
     paymentId: paymentId,
     //itemTemplate: itemsTemplate,
-    payTotal: amount/100
+    itemsTemplate: itemsTemplate
   };
   const html = template(replacements);
 
@@ -144,7 +117,7 @@ async function correoCarrito(paymentId, amount, newItems, userId) {
   const mailOptions = {
     from: 'backendpf@gmail.com', // TODO: email sender
     to: user.dataValues.email, // Email del usuario registrado (reemplazamos "correo" por "userId")
-    subject: `Gracias por tu Compra ${user.dataValues.user}`,
+    subject: `Thank you for your purchase, ${user.dataValues.user}`,
     html: `<!DOCTYPE html>
       <html lang="en">
       <head>
@@ -158,7 +131,7 @@ async function correoCarrito(paymentId, amount, newItems, userId) {
   };
 
   // Enviar el correo electrónico
-  transporter.sendMail(mailOptions, function(error, info) {
+  transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error);
     } else {
