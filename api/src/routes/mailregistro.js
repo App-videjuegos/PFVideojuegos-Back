@@ -40,7 +40,7 @@ const transporter = nodemailer.createTransport({
 const mailOptions = {
     from: 'backendpf@gmail.com', // TODO: email sender
     to: correo, // Email del usuario registrado
-    subject: 'Bienvenido a GameStack',
+    subject: 'Welcome to GameStack.',
     html: `<!DOCTYPE html>
       <html lang="en">
       <head>
