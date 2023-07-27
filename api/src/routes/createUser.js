@@ -29,9 +29,9 @@ router.post("/", async (req, res) => {
       res.status(201).json({message: 'Usuario creado exitosamente', data: newUser});
   } catch (Error) {
     console.log(Error.message)
-    if(Error.message.includes(email))res.status(400).json({ message: "The email already exists"});
-    if(Error.message.includes(phone))res.status(400).json({ message: "The phone number already exists" });
-    if(Error.message.includes(user))res.status(400).json({ message: "User already exists" });
+    if(Error.message.includes(email))res.status(400).json({ message: "The email address is already associated with another account."});
+    if(Error.message.includes(phone))res.status(400).json({ message: "The phone is already associated with another account." });
+    if(Error.message.includes(user))res.status(400).json({ message: "The user is already assigned to another user." });
     if(Error.message.includes(id))res.status(400).json({ message: "UserId already exists" });
   }
 });
