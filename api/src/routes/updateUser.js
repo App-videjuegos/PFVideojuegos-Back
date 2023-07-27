@@ -3,15 +3,27 @@ const bcrypt = require('bcrypt');
 
 const updateUser = async (req, res) => {
 
-  const { id, user, fullname, pass, userAdmin, email, date, image, phone, tac, newsLetter } = req.body;
+  const { ...allProperties } = req.body;
+  let id = allProperties.id;
 
   try {
     const usuario = await Users.findByPk(id);
     if (!usuario) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
-    const password = await bcrypt.hash(pass, 10);
-    await usuario.update({ id, user, fullname, password, userAdmin, email, date, image, phone, tac, newsLetter });
+    if (allProperties.pass) {
+      const password = await bcrypt.hash(allProperties.pass, 10);
+      allProperties.password = password;
+      delete allProperties.id;
+      delete allProperties.pass;
+      console.log(allProperties)
+      await usuario.update(allProperties);
+    } else {
+      delete allProperties.id;
+      console.log(allProperties)
+      await usuario.update(allProperties);
+    }
+
 
     return res.json({ message: "Usuario actualizado correctamente" });
   } catch (error) {
