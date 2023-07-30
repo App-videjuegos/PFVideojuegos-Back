@@ -181,8 +181,9 @@ let resultados = [];
       if (videojuego) {
         const {requeriments_en } = videojuego;
         const requerimentsActualizados = requeriments_en.length ? requeriments_en : [{"minimum": "<strong>Minimum:</strong><br><ul><li><strong>OS:</strong> macOS 10.9.1</li><li><strong>Processor:</strong> 2.0GHz Intel or greater</li><li><strong>Memory:</strong> 4GB</li><li><strong>Graphics:</strong> 512Mb AMD 4850, 512Mb Nvidia 650M, Intel HD4000</li><li><strong>Hard Drive:</strong> 14GB</li></ul>"}];
+        const stock = Math.floor(Math.random() * 50) + 1;
         const resultado = await Videogame.update(
-          { description, requeriments_en: requerimentsActualizados },
+          { description, requeriments_en: requerimentsActualizados, stock: stock },
           { where: { id } }
         );
         resultados.push(resultado);

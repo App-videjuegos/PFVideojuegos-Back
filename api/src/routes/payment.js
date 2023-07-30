@@ -63,16 +63,16 @@ router.post("/createSale", async (req, res) => {
     const { paymentId, amount, items, userId } = req.body;
     const newItems = JSON.parse(items);
     try {
-        correoCarrito(paymentId, amount, newItems, userId)
         const response = await addToSales(paymentId, amount, newItems, userId);
         console.log("Venta almacenada")
+        correoCarrito(paymentId, amount, newItems, userId)
         res.json({ message: "ok", })
 
     } catch (error) {
         const refund = await stripe.refunds.create({
             payment_intent: paymentId,
         });
-    
+        console.log(error.message)
         res.status(404).send(error);
     }
 });
