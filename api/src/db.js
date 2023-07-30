@@ -5,7 +5,7 @@ require("dotenv").config();
 
 
 const sequelize = new Sequelize(
-  
+
   "postgresql://postgres:dxGgzA4NLgpvu8C53wJm@containers-us-west-88.railway.app:7549/railway",
   
   {
@@ -39,7 +39,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Videogame, Genre, Users, Carts, Sales, Reviews } = sequelize.models;
+const { Videogame, Genre, Users, Carts, Sales, Reviews, LoginGoogles } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);

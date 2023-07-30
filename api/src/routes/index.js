@@ -30,6 +30,7 @@ const updateGameRating = require("./updateGameRating")
 const reviews = require("./reviews")
 const getReviews = require("./getReviews")
 const forgotPassword = require("./forgotPassword")
+const loginGoogles = require("./loginGoogles")
 
 
 
@@ -64,6 +65,7 @@ router.use(carritoRouter);
 router.use("/games", bulkCreateDescriptionsGames);
 router.use("/games", updateGameRating);
 router.use("/forgotPassword", forgotPassword)
+router.use("/loginGoogle", loginGoogles);
 
 
 
