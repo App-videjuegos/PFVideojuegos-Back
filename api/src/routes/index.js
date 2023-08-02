@@ -31,6 +31,9 @@ const reviews = require("./reviews")
 const getReviews = require("./getReviews")
 const forgotPassword = require("./forgotPassword")
 const loginGoogles = require("./loginGoogles")
+const createFavorite = require("./createFavorites")
+const getFavoriteUserId = require("./getFavoritesByUserId")
+const getAllFavorites = require("./getAllFavorites")
 
 
 
@@ -66,6 +69,9 @@ router.use("/games", bulkCreateDescriptionsGames);
 router.use("/games", updateGameRating);
 router.use("/forgotPassword", forgotPassword)
 router.use("/loginGoogle", loginGoogles);
+router.use("/favorites", createFavorite);
+router.use("/favorites", getFavoriteUserId);
+router.use("/favorites", getAllFavorites);
 
 
 
