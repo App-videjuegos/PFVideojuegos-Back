@@ -73,7 +73,7 @@ async function loginGoogles({
       // Creamos usuario logeado por medio de google.
 
       let resultado = await Users.create({
-        id,
+        id: 1 + Math.floor(Math.random() * 999),
         user: email,
         password: " ",
         // isGoogle: true,
