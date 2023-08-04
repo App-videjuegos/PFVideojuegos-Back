@@ -55,13 +55,18 @@ async function loginGoogles({
     where: { google_id: google_id },
   });
 
-  // if (existingUser) {
-  //   const token = jwt.sign({ userId: existingUser.user_id }, secretKey, {
-  //     expiresIn: "1h",
-  //   });
-  //   console.log(token);
-  // } 
-  // else {
+  if (existingUser) {
+    const userDb = await Users.findOne({
+      where: { email: email }
+    })
+    const token = jwt.sign({ userId: existingUser.id }, secretKey, {
+      expiresIn: "1h",
+    });
+    // console.log(token);
+    userDb.token = token; // Agregar el token al objeto resultado
+    return { ...userDb.toJSON(), token }
+  } 
+  else {
     // El usuario no existe en la base de datos, crear uno nuevo
     if (verified_email) {
       // Enviar una respuesta al cliente
@@ -92,7 +97,6 @@ async function loginGoogles({
         verified_email,
         // user_id: resultado.id // falta esto
       });
-
       if (resultado && newLoginGoogle) {
         const token = jwt.sign({ userId: resultado.id }, secretKey, {
           expiresIn: "1h",
@@ -101,6 +105,7 @@ async function loginGoogles({
         resultado.token = token; // Agregar el token al objeto resultado
         return { ...resultado.toJSON(), token }
       }
+    }
     }
   }
 
