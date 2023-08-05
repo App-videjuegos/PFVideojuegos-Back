@@ -46,6 +46,9 @@ const addToSales = async (id, amount, items, userId) => {
       //console.log("Despues de buscar el videojuego");
       videogameFind.stock = videogameFind.stock - quantity;
       //console.log("este es el stock que se actualiza ---> " + videogameFind.stock);
+      if (videogameFind.stock === 0){
+        videogameFind.deleted = true;
+      }
 
       try {
         await videogameFind.save();
