@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { searchDB } = require("../controllers/getGamesName");
+const { searchDB, allGamesAdmin } = require("../controllers/getGamesName");
 const express = require("express");
 
 
@@ -16,6 +16,17 @@ router.get("/", async (req, res) => {
     res.status(404).json({ error: error.message });
   }
 });
+
+router.get("/admin", async (req, res) => {
+
+  try {
+    let resultado = await allGamesAdmin();
+    res.status(200).json( resultado );
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+});
+
 
 module.exports = router;
 
