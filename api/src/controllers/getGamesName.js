@@ -17,8 +17,10 @@ async function searchDB(name) {
     return allGames;
   } else {
     let gameName = await Videogame.findAll({
-
-      where: { name: { [Op.iLike]: `%${name}%` } },
+      where: {
+        name: { [Op.iLike]: `%${name}%` },
+        deleted: false //si le pasan name pasa solo los que deleted estan false
+      },
       attributes: {
         exclude: ["createdAt", "updatedAt"]
       }
