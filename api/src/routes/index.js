@@ -34,6 +34,7 @@ const loginGoogles = require("./loginGoogles")
 const createFavorite = require("./createFavorites")
 const getFavoriteUserId = require("./getFavoritesByUserId")
 const getAllFavorites = require("./getAllFavorites")
+const putReview = require("./putReview")
 
 
 
@@ -72,6 +73,7 @@ router.use("/loginGoogle", loginGoogles);
 router.use("/favorites", createFavorite);
 router.use("/favorites", getFavoriteUserId);
 router.use("/favorites", getAllFavorites);
+router.use("/reviews", putReview);
 
 
 

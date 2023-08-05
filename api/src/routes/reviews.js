@@ -42,6 +42,7 @@ router.post("/", async (req, res) => {
       .json({ message: "Review creada exitosamente", data: newReview });
   } catch (Error) {
     console.log(Error.message);
+    res.status(404).json({ error: Error.message });
   }
 });
 

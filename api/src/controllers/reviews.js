@@ -15,6 +15,7 @@ async function createReview({
   user,
 }) {
   try {
+    console.log("estoy en el controller")
     let resultado = await Reviews.create({
       id,
       token,
@@ -30,9 +31,10 @@ async function createReview({
       user,
     });
     console.log(resultado);
+    return resultado;
   } catch (error) {
-    //console.log(error.parent.detail)
-    throw new Error(error.parent.detail);
+    console.log(error)
+    throw new Error(error);
   }
 }
 
