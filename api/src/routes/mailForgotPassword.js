@@ -31,14 +31,14 @@ async function emailForgotPassword(userId, newPassword, email) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.EMAIL || 'backendpf@gmail.com', // TODO: your gmail account
-      pass: process.env.PASSWORD || 'xbwlxczwffqyefsp' // TODO: your gmail password
+      user: process.env.EMAIL || 'gamestackpf@gmail.com', // TODO: your gmail account
+      pass: process.env.PASSWORD || 'zzbbmhtwzhwnmoef' // TODO: your gmail password
     }
   });
 
   // Definir el mensaje de correo electrónico
   const mailOptions = {
-    from: 'backendpf@gmail.com', // TODO: email sender
+    from: 'gamestackpf@gmail.com', // TODO: email sender
     to: email, // Email del usuario registrado (reemplazamos "correo" por "userId")
     subject: `${userId} you have requested to recover your password`,
     html: `<!DOCTYPE html>
