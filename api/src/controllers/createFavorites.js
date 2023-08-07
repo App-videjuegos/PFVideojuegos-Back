@@ -20,13 +20,17 @@ async function createFavorite({ videogameId, userId, isFav }) {
   });
 
   if (existingFavorite) {
-    existingFavorite.isFav = isFav;
-    await Favorites.update(existingFavorite, {
+    const cambio = await Favorites.update({ isFav: isFav }, {
       where: {
         id: existingFavorite.id
       },
-  })
-  return existingFavorite
+    })
+    if (cambio > 0) {
+      const updateFav = await Favorites.findByPk(existingFavorite.id);
+      console.log("se encontro fav")
+      return updateFav
+    }
+
   } else {
     try {
       let favorite = await Favorites.create({
