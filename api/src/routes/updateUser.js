@@ -50,16 +50,16 @@ const updateUser = async (req, res) => {
       allProperties.password = password;
       delete allProperties.id;
       delete allProperties.pass;
-      console.log(allProperties)
-      await usuario.update(allProperties);
+      //console.log(allProperties)
+      const response= await usuario.update(allProperties);
+      res.status(200).json(response );
     } else {
       delete allProperties.id;
-      console.log(allProperties)
-      await usuario.update(allProperties);
+      //console.log(allProperties)
+      const response = await usuario.update(allProperties);
+      res.status(200).json(response );
     }
 
-
-    return res.json({ message: "Usuario actualizado correctamente" });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Error al actualizar el usuario" });
