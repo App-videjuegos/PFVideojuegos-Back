@@ -106,16 +106,16 @@ async function correoCarrito(paymentId, amount, newItems, userId) {
 
   // Configurar el transportador de correo electrónico
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: 'hotmail',
     auth: {
-      user: process.env.EMAIL || 'gamestackpf@gmail.com', // TODO: your gmail account
-      pass: process.env.PASSWORD || 'zzbbmhtwzhwnmoef' // TODO: your gmail password
+      user: process.env.EMAIL || 'gamestackpf@hotmail.com', // TODO: your gmail account
+      pass: process.env.PASSWORD || 'GameStack2023*' // TODO: your gmail password
     }
   });
 
   // Definir el mensaje de correo electrónico
   const mailOptions = {
-    from: 'gamestackpf@gmail.com', // TODO: email sender
+    from: 'gamestackpf@hotmail.com', // TODO: email sender
     to: user.dataValues.email, // Email del usuario registrado (reemplazamos "correo" por "userId")
     subject: `Thank you for your purchase, ${user.dataValues.user}`,
     html: `<!DOCTYPE html>
