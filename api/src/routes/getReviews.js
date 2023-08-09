@@ -9,10 +9,10 @@ router.use(express.json());
 
 router.get("/", async (req, res) => {
   
-  let { userId, videogameId } = req.query;
+  let { userId, videogameId, user } = req.query;
 
   try {
-    let resultado = await searchReviews(userId, videogameId);
+    let resultado = await searchReviews(userId, videogameId, user);
     res.status(200).json( resultado );
   } catch (error) {
     res.status(404).json({ error: error.message });
